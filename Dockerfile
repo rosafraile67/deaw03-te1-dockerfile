@@ -14,8 +14,7 @@ RUN \
 	&& apt-get install nano \
 	&& apt-get install apache2 --yes \
 	&& mkdir /var/www/html/sitio1 /var/www/html/sitio2
-	# && apt-get install ssh --yes \
-	# && apt-get install git --yes
+
 
 # Copiamos el index al directorio por defecto del servidor Web
 COPY index1.html index2.html sitio1.conf sitio2.conf sitio1.key sitio1.cer /
@@ -30,16 +29,6 @@ RUN \
 	&& mv /sitio1.key /etc/ssl/private \
 	&& mv /sitio1.cer /etc/ssl/certs \
 	&& a2enmod ssl
-
-# Copiamos la clave privada
-#COPY SSH-key/id_rsa /etc 
-
-# arrancamos el ssh-agent, añadimos la clave y el host
-#RUN eval "$(ssh-agent -s)" \
-#&& chmod 700 /etc/id_rsa \
-#&& ssh-add /etc/id_rsa \
-#&& ssh-keyscan -H github.com >> /etc/ssh/ssh_known_hosts \
-#&& git clone git@github.com:deaw-birt/proyecto-html.git /usr/local/apache2/htdocs/proyecto
 
 # Indicamos el puerto que utiliza la imagen
 EXPOSE 80
