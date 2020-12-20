@@ -14,7 +14,19 @@ RUN \
 	&& apt-get install nano \
 	&& apt-get install apache2 --yes \
 	&& apt-get install -y proftpd && apt-get install openssl \
-	&& mkdir /var/www/html/sitio1 /var/www/html/sitio2
+	&& mkdir /var/www/html/sitio1 /var/www/html/sitio2 \
+# Generar usuario rosafraile1
+	&& useradd -m -d /var/www/html/sitio1/rosafraile1 -s /usr/sbin/nologin -p $(openssl passwd -1 rosafraile1) rosafraile1 \
+# Generar claves
+	&& openssl req -new -nodes -keyout proftpd.key -out proftpd.crt \
+	-subj "/C=ES/ST=Vizcaya/L=Durango/O=ftp.rosafraile.org/OU=ftp.rosafraile.org/CN=ftp.rosafraile.org" \
+	-days 365 -x509 \
+	&& mv proftpd.crt /etc/ssl/certs/proftpd.crt \
+	&& mv proftpd.key /etc/ssl/private/proftpd.key
+
+# Copiamos los ficheros necesarios para FTP
+COPY proftpd.conf /etc/proftpd/proftpd.conf
+COPY tls.conf /etc/proftpd/tls.conf
 
 
 # Copiamos el index al directorio por defecto del servidor Web
