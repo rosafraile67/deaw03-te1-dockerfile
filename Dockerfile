@@ -4,15 +4,16 @@ FROM ubuntu:18.04
 # Damos información sobre la imagen que estamos creando
 LABEL \
 	version="1.0" \
-	description="Ubuntu + Apache2 + virtual host" \
-	creationDate="23-11-2019" \
-	maintainer="Nora San Saturnino <nsansaturnino@birt.eus>"
+	description="Ubuntu + Apache2 + virtual host + FTP" \
+	creationDate="20-12-2020" \
+	maintainer="Rosa Fraile <mfraile@birt.eus>"
 
-# Instalamos el editor nano
+# Instalamos el editor nano, Apache y FTP
 RUN \
 	apt-get update \
 	&& apt-get install nano \
 	&& apt-get install apache2 --yes \
+	&& apt-get install -y proftpd && apt-get install openssl \
 	&& mkdir /var/www/html/sitio1 /var/www/html/sitio2
 
 
@@ -33,3 +34,5 @@ RUN \
 # Indicamos el puerto que utiliza la imagen
 EXPOSE 80
 EXPOSE 443
+EXPOSE 20
+EXPOSE 21
