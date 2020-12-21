@@ -30,17 +30,23 @@ COPY tls.conf /etc/proftpd/tls.conf
 
 
 # Copiamos el index al directorio por defecto del servidor Web
-COPY index1.html index2.html sitio1.conf sitio2.conf sitio1.key sitio1.cer /
+#COPY index1.html index2.html sitio1.conf sitio2.conf sitio1.key sitio1.cer /
+COPY index1.html /var/www/html/sitio1/index.html \
+	 && index2.html /var/www/html/sitio2/index.html \
+	 && sitio1.conf /etc/apache2/sites-available \
+	 && sitio2.conf /etc/apache2/sites-available \
+	 && sitio1.key /etc/ssl/private \
+	 && sitio1.cer /etc/ssl/certs/
 
 RUN \
-	mv /index1.html /var/www/html/sitio1/index.html \
-	&& mv /index2.html /var/www/html/sitio2/index.html \
-	&& mv /sitio1.conf /etc/apache2/sites-available \
-	&& a2ensite sitio1 \
-	&& mv /sitio2.conf /etc/apache2/sites-available \
+#	mv /index1.html /var/www/html/sitio1/index.html \
+#	&& mv /index2.html /var/www/html/sitio2/index.html \
+#	&& mv /sitio1.conf /etc/apache2/sites-available \
+	a2ensite sitio1 \
+#	&& mv /sitio2.conf /etc/apache2/sites-available \
 	&& a2ensite sitio2 \
-	&& mv /sitio1.key /etc/ssl/private \
-	&& mv /sitio1.cer /etc/ssl/certs \
+#	&& mv /sitio1.key /etc/ssl/private \
+#	&& mv /sitio1.cer /etc/ssl/certs \
 	&& a2enmod ssl
 
 # Indicamos el puerto que utiliza la imagen
