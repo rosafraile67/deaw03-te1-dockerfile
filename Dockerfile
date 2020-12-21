@@ -13,25 +13,25 @@ RUN \
 	apt-get update \
 	&& apt-get install nano \
 	&& apt-get install apache2 --yes \
+# Instalamos FTP y ssl
 	&& apt-get install -y proftpd && apt-get install openssl \
 	&& mkdir /var/www/html/sitio1 /var/www/html/sitio2 \
 # Generar usuario rosafraile1
 	&& useradd -m -d /var/www/html/sitio1/rosafraile1 -s /usr/sbin/nologin -p $(openssl passwd -1 rosafraile1) rosafraile1 \
-# Generar claves
+# Generar usuario rosafraile2
+	&& useradd -m -d /var/www/html/sitio2/rosafraile2 -p $(openssl passwd -1 rosafraile2) rosafraile2 \
+# Generar claves para FTP
 	&& openssl req -new -nodes -keyout proftpd.key -out proftpd.crt \
 	-subj "/C=ES/ST=Vizcaya/L=Durango/O=ftp.rosafraile.org/OU=ftp.rosafraile.org/CN=ftp.rosafraile.org" \
 	-days 365 -x509 \
 	&& mv proftpd.crt /etc/ssl/certs/proftpd.crt \
-	&& mv proftpd.key /etc/ssl/private/proftpd.key
+	&& mv proftpd.key /etc/ssl/private/proftpd.key \
+# Instalamos ssh
+	&& apt-get install -y ssh
 
-# Copiamos los ficheros necesarios para FTP
-COPY proftpd.conf /etc/proftpd/proftpd.conf
-COPY tls.conf /etc/proftpd/tls.conf
-
-
-# Copiamos el index al directorio por defecto del servidor Web
-COPY index1.html index2.html sitio1.conf sitio2.conf sitio1.key sitio1.cer proftpd.conf tls.conf /
-
+# Copiamos los ficheros necesarios al directorio por defecto del servidor Web
+COPY index1.html index2.html sitio1.conf sitio2.conf sitio1.key sitio1.cer proftpd.conf tls.conf ftpusers sshd_config /
+# Movemos cada fichero copiado al directorio que le corresponde
 RUN \
 	mv /index1.html /var/www/html/sitio1/index.html \
 	&& mv /index2.html /var/www/html/sitio2/index.html \
@@ -43,10 +43,16 @@ RUN \
 	&& mv /sitio1.cer /etc/ssl/certs \
 	&& a2enmod ssl \
 	&& mv /proftpd.conf /etc/proftpd/proftpd.conf \
-	&& mv /tls.conf /etc/proftpd/tls.conf
+	&& mv /tls.conf /etc/proftpd/tls.conf \
+	&& mv ftpusers /etc/ftpusers \
+	&& mv sshd_config /etc/ssh/sshd_config
 
 # Indicamos el puerto que utiliza la imagen
+# Puertos para HTTP y HTTPS
 EXPOSE 80
 EXPOSE 443
+# Puertos para FTP
 EXPOSE 20
 EXPOSE 21
+# Puerto para SSH
+EXPOSE 33
