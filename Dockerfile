@@ -31,12 +31,12 @@ COPY tls.conf /etc/proftpd/tls.conf
 
 # Copiamos el index al directorio por defecto del servidor Web
 #COPY index1.html index2.html sitio1.conf sitio2.conf sitio1.key sitio1.cer /
-COPY index1.html /var/www/html/sitio1/index.html \
-	 && index2.html /var/www/html/sitio2/index.html \
-	 && sitio1.conf /etc/apache2/sites-available \
-	 && sitio2.conf /etc/apache2/sites-available \
-	 && sitio1.key /etc/ssl/private \
-	 && sitio1.cer /etc/ssl/certs/
+COPY index1.html /var/www/html/sitio1/index.html
+COPY index2.html /var/www/html/sitio2/index.html
+COPY sitio1.conf /etc/apache2/sites-available/ 
+COPY sitio2.conf /etc/apache2/sites-available/
+COPY sitio1.key /etc/ssl/private/ 
+COPY sitio1.cer /etc/ssl/certs/
 
 RUN \
 #	mv /index1.html /var/www/html/sitio1/index.html \
