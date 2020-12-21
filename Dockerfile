@@ -54,5 +54,7 @@ EXPOSE 443
 # Puertos para FTP
 EXPOSE 20
 EXPOSE 21
+# Puertos para FTP anónimo
+EXPOSE 50000-50030
 # Puerto para SSH
 EXPOSE 33
