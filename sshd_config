@@ -1,0 +1,22 @@
+# This is ssh server systemwide configuration file.
+
+Port 33
+ListenAddress 192.168.99.101
+HostKey /etc/ssh/ssh_host_key
+ServerKeyBits 1024
+LoginGraceTime 600
+KeyRegenerationInterval 3600
+PermitRootLogin no
+IgnoreRhosts yes
+IgnoreUserKnownHosts yes
+StrictModes yes
+X11Forwarding no
+PrintMotd yes
+SyslogFacility AUTH
+LogLevel INFO
+RhostsAuthentication no
+RhostsRSAAuthentication no
+RSAAuthentication yes
+PasswordAuthentication yes
+PermitEmptyPasswords no
+AllowUsers admin rosafraile2
