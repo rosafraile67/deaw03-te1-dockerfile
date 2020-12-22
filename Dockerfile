@@ -57,4 +57,4 @@ EXPOSE 21
 # Puertos para FTP anónimo
 EXPOSE 50000-50030
 # Puerto para SSH
-EXPOSE 33
+EXPOSE 1024

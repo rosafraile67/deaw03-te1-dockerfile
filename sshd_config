@@ -1,6 +1,6 @@
 # This is ssh server systemwide configuration file.
 
-Port 33
+Port 1024
 ChallengeResponseAuthentication no
 UsePAM yes
 X11Forwarding yes
