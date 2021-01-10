@@ -21,7 +21,7 @@ RUN \
 # Generar usuario rosafraile2
 	&& useradd -m -d /var/www/html/sitio2/rosafraile2 -p $(openssl passwd -1 rosafraile2) rosafraile2 \
 # Generar usuario rosafraile para acceso FTP anonimo
-	&& useradd -m -d /srv/ftp rosafraile \
+	&& useradd -m -d /srv/ftp -s /usr/sbin/nologin rosafraile \
 # Generar claves para FTP
 	&& openssl req -new -nodes -keyout proftpd.key -out proftpd.crt \
 	-subj "/C=ES/ST=Vizcaya/L=Durango/O=ftp.rosafraile.org/OU=ftp.rosafraile.org/CN=ftp.rosafraile.org" \
