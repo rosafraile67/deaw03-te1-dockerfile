@@ -54,7 +54,7 @@ RUN \
 	&& chmod 700 /etc/id_rsa \
 	&& ssh-add /etc/id_rsa \
 	&& ssh-keyscan -H github.com >> /etc/ssh/ssh_known_hosts \
-	&& git clone git@github.com:deaw-birt/deaw03-te1-ftp-anonimo.git
+	&& git clone git@github.com:deaw-birt/deaw03-te1-ftp-anonimo.git /srv/ftp
 
 # Indicamos el puerto que utiliza la imagen
 # Puertos para HTTP y HTTPS
