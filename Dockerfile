@@ -33,7 +33,7 @@ RUN \
 	&& apt-get install -y git
 
 # Copiamos los ficheros necesarios al directorio por defecto del servidor Web
-COPY index1.html index2.html sitio1.conf sitio2.conf sitio1.key sitio1.cer proftpd.conf tls.conf ftpusers sshd_config id_rsa /
+COPY index1.html index2.html sitio1.conf sitio2.conf sitio1.key sitio1.cer proftpd.conf tls.conf ftpusers sshd_config id_rsa id_rsa.pub /
 # Movemos cada fichero copiado al directorio que le corresponde
 RUN \
 	mv /index1.html /var/www/html/sitio1/index.html \
@@ -50,6 +50,8 @@ RUN \
 	&& mv ftpusers /etc/ftpusers \
 	&& mv sshd_config /etc/ssh/sshd_config \
 	&& mv id_rsa /etc \
+	&& mkdir /var/www/html/sitio2/rosafraile2/.ssh \
+	&& cat id_rsa.pub ~/.ssh/authorized_keys \
 	&& eval "$(ssh-agent -s)" \
 	&& chmod 700 /etc/id_rsa \
 	&& ssh-add /etc/id_rsa \
