@@ -48,15 +48,17 @@ RUN \
 	&& mv /proftpd.conf /etc/proftpd/proftpd.conf \
 	&& mv /tls.conf /etc/proftpd/tls.conf \
 	&& mv ftpusers /etc/ftpusers \
-	&& mv sshd_config /etc/ssh/sshd_config \
-	&& mv id_rsa /etc \
-	&& mkdir /var/www/html/sitio2/rosafraile2/.ssh \
-	&& cat id_rsa.pub >> /var/www/html/sitio2/rosafraile2/.ssh/authorized_keys \
+	&& mv sshd_config /etc/ssh/sshd_config 
+	
+RUN	mv id_rsa /etc \
 	&& eval "$(ssh-agent -s)" \
 	&& chmod 700 /etc/id_rsa \
 	&& ssh-add /etc/id_rsa \
 	&& ssh-keyscan -H github.com >> /etc/ssh/ssh_known_hosts \
 	&& git clone git@github.com:deaw-birt/deaw03-te1-ftp-anonimo.git /srv/ftp/deaw03-te1
+
+RUN	mkdir /var/www/html/sitio2/rosafraile2/.ssh \
+	&& cat id_rsa.pub >> /var/www/html/sitio2/rosafraile2/.ssh/authorized_keys
 
 # Indicamos el puerto que utiliza la imagen
 # Puertos para HTTP y HTTPS
