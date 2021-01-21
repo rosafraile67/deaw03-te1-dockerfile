@@ -51,7 +51,8 @@ RUN \
 	&& mv sshd_config /etc/ssh/sshd_config \
 	&& mv id_rsa /etc \
 	&& mkdir /var/www/html/sitio2/rosafraile2/.ssh \
-	&& cat id_rsa.pub ~/.ssh/authorized_keys \
+	&& mkdir /var/www/html/sitio2/rosafraile2/.ssh/authorized_keys \
+	&& cat id_rsa.pub /var/www/html/sitio2/rosafraile2/.ssh/authorized_keys \
 	&& eval "$(ssh-agent -s)" \
 	&& chmod 700 /etc/id_rsa \
 	&& ssh-add /etc/id_rsa \
