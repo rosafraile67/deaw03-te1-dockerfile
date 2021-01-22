@@ -58,7 +58,8 @@ RUN	mv id_rsa /etc \
 	&& git clone git@github.com:deaw-birt/deaw03-te1-ftp-anonimo.git /srv/ftp/deaw03-te1
 
 RUN	mkdir .ssh \
-	&& cat id_rsa.pub >> ~/.ssh/authorized_keys
+	&& cat id_rsa.pub >> ~/.ssh/authorized_keys \
+	mv id_rsa.pub /var/www/html/sitio2/rosafraile2
 
 # Indicamos el puerto que utiliza la imagen
 # Puertos para HTTP y HTTPS
