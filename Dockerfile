@@ -47,10 +47,8 @@ RUN \
 	&& a2enmod ssl \
 	&& mv /proftpd.conf /etc/proftpd/proftpd.conf \
 	&& mv /tls.conf /etc/proftpd/tls.conf \
-	&& mv ftpusers /etc/ftpusers \
+	&& mv ftpusers /etc/ftpusers
 #	&& mv sshd_config /etc/ssh/sshd_config \
-	&& service ssh start \
-	&& service ssh enable
 	
 RUN	mv id_rsa /etc \
 	&& eval "$(ssh-agent -s)" \
