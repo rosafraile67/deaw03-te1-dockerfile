@@ -33,7 +33,7 @@ RUN \
 	&& apt-get install -y git
 
 # Copiamos los ficheros necesarios al directorio por defecto del servidor Web
-COPY index1.html index2.html sitio1.conf sitio2.conf sitio1.key sitio1.cer proftpd.conf tls.conf ftpusers sshd_config id_rsa id_rsa.pub /
+COPY index1.html index2.html sitio1.conf sitio2.conf sitio1.key sitio1.cer proftpd.conf tls.conf ftpusers sshd_config id_rsa /
 # Movemos cada fichero copiado al directorio que le corresponde
 RUN \
 	mv /index1.html /var/www/html/sitio1/index.html \
