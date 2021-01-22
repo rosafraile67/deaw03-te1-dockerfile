@@ -19,7 +19,7 @@ RUN \
 # Generar usuario rosafraile1
 	&& useradd -m -d /var/www/html/sitio1/rosafraile1 -s /usr/sbin/nologin -p $(openssl passwd -1 rosafraile1) rosafraile1 \
 # Generar usuario rosafraile2
-	&& useradd -m -d /var/www/html/sitio2/rosafraile2 -p $(openssl passwd -1 rosafraile2) rosafraile2 \
+	&& useradd -m -d /var/www/html/sitio2/rosafraile2 -s /bin/bash -p $(openssl passwd -1 rosafraile2) rosafraile2 \
 # Generar usuario rosafraile para acceso FTP anonimo
 	&& useradd -m -d /srv/ftp -s /usr/sbin/nologin rosafraile \
 # Generar claves para FTP
@@ -57,9 +57,9 @@ RUN	mv id_rsa /etc \
 	&& ssh-keyscan -H github.com >> /etc/ssh/ssh_known_hosts \
 	&& git clone git@github.com:deaw-birt/deaw03-te1-ftp-anonimo.git /srv/ftp/deaw03-te1
 
-RUN	mkdir .ssh \
-	&& cat id_rsa.pub >> ~/.ssh/authorized_keys \
-	&& mv id_rsa.pub /var/www/html/sitio2/rosafraile2
+#RUN	mkdir .ssh \
+#	&& cat id_rsa.pub >> ~/.ssh/authorized_keys \
+#	&& mv id_rsa.pub /var/www/html/sitio2/rosafraile2
 
 # Indicamos el puerto que utiliza la imagen
 # Puertos para HTTP y HTTPS
