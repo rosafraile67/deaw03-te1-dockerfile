@@ -60,10 +60,10 @@ RUN	mv id_rsa /etc \
 # Puertos para HTTP y HTTPS
 EXPOSE 80
 EXPOSE 443
-# Puertos para FTP
+# Puertos para FTP activo
 EXPOSE 20
 EXPOSE 21
-# Puertos para FTP anónimo
+# Puertos para FTP pasivo
 EXPOSE 50000-50030
 # Puerto para SSH
 EXPOSE 22
