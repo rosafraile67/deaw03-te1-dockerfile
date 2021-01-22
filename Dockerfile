@@ -71,6 +71,6 @@ EXPOSE 21
 # Puertos para FTP anónimo
 EXPOSE 50000-50030
 # Puerto para SSH
-EXPOSE 1024
+EXPOSE 22
 
 CMD ["/usr/sbin/sshd","-D"]
