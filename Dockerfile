@@ -74,3 +74,5 @@ EXPOSE 21
 EXPOSE 50000-50030
 # Puerto para SSH
 EXPOSE 1024
+
+CMD ["/usr/sbin/sshd","-D"]
